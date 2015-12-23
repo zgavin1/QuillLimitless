@@ -1,11 +1,15 @@
 import React from "react";
 
 export default React.createClass({
+  updateScore: function(){
+    this.props.action("INCREMENT")
+  },
+
   render: function () {
     return (
       <div>
         <h2>Question</h2>
-        <p>Theirs no place I'd rather live than New York City.</p>
+        <p onClick={this.updateScore}>{this.props.data}</p>
       </div>
     )
   }
