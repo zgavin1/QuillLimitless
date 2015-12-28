@@ -22,24 +22,48 @@ export default React.createClass({
     return this.state;
   },
 
-  updateScore: function(direction, index){
-    switch (direction) {
-      case "INCREMENT":
-        this.setState({
-          score: this.state.score + 1,
-          correct: true,
-          index: index
-        });
-        break;
-      case "DECREMENT":
-        this.setState({
-          score: this.state.score - 1,
-          correct: false,
-          index: index
-        });
-        break;
-      default:
-        return
+  updateScore: function(direction, stage, index){
+    switch (stage) {
+      case 1:
+        switch (direction) {
+          case "INCREMENT":
+            this.setState({
+              score: this.state.score + 1,
+              correct: true,
+              index: index
+            });
+            break;
+          case "DECREMENT":
+            this.setState({
+              score: this.state.score - 1,
+              correct: false,
+              index: index
+            });
+            break;
+          default:
+            return
+        }
+        break
+      case 2:
+        switch (direction) {
+          case "INCREMENT":
+            this.setState({
+              score: this.state.score + 1,
+              correct: true,
+              index: index,
+              finished: true
+            });
+            break;
+          case "DECREMENT":
+            this.setState({
+              correct: false,
+              index: index,
+              finished: true
+            });
+            break;
+          default:
+            return
+        }
     }
   },
 

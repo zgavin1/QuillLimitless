@@ -3,12 +3,20 @@ import React from "react";
 import "../../styles/question.scss";
 
 export default React.createClass({
+  getInitialState: function () {
+    return {submission: null};
+  },
+
   updateScore: function (direction, index) {
     this.props.action(direction, index);
   },
 
   splitPrompt: function () {
     return this.props.data.question.question.prompt.split(" ");
+  },
+
+  splitAnswer: function () {
+    return this.props.data.question.question.answer.split(" ");
   },
 
   getTargetWord: function () {
@@ -23,11 +31,16 @@ export default React.createClass({
     return j;
   },
 
+  getAnswer: function () {
+    const words = this.splitAnswer();
+    return words[this.getTargetWord()].replace(/[{}]/g, "")
+  },
+
   checkWord: function (index) {
     if (index === this.getTargetWord()) {
-      this.updateScore("INCREMENT", index);
+      this.updateScore("INCREMENT", 1, index);
     } else {
-      this.updateScore("DECREMENT", index);
+      this.updateScore("DECREMENT", 1, index);
     }
   },
 
@@ -59,6 +72,18 @@ export default React.createClass({
     });
   },
 
+  finishedCorrectlyWordList: function () {
+    const words = this.splitAnswer();
+    const correctIndex = this.getTargetWord();
+    return words.map((word, index) => {
+      if (index === correctIndex) {
+        return <span className="correct">{word.replace(/[{}]/g, "")} </span>
+      } else {
+        return <span>{word.replace(/[{}]/g, "")} </span>
+      }
+    });
+  },
+
   answeredIncorrectlyWordList: function () {
     const words = this.splitPrompt();
     const correctIndex = this.getTargetWord();
@@ -77,7 +102,10 @@ export default React.createClass({
   },
 
   generateWordList: function () {
-    if (this.props.data.correct === true) {
+    if (this.props.data.finished === true) {
+      return this.finishedCorrectlyWordList();
+    }
+    else if (this.props.data.correct === true) {
       return this.answeredCorrectlyWordList();
     }
     else if (this.props.data.correct === false) {
@@ -96,12 +124,44 @@ export default React.createClass({
     }
   },
 
+  handleChange: function(event) {
+    this.setState({submission: event.target.value}, function () {
+      console.log(this.state.submission);
+    });
+
+  },
+
+  checkWordSubmission: function () {
+    if (this.state.submission === this.getAnswer()) {
+      console.log("you got it right");
+      this.updateScore("INCREMENT", 2);
+    }
+    else {
+      console.log("you got it wrong");
+      this.updateScore("DECREMENT", 2);
+    }
+  },
+
+  secondaryAnswerBox: function () {
+    if (this.props.data.correct === true) {
+      return (
+        <div>
+          <h4>What should the correct word be?</h4>
+          <input placeholder="then" type="text" onChange={this.handleChange}/>
+          <button onClick={this.checkWordSubmission}>Submit</button>
+        </div>
+
+      )
+    }
+  },
+
   render: function () {
     return (
       <div>
         <h2>Question</h2>
         {this.stateSpecificComponent()}
         <p>{this.generateWordList()}</p>
+        {this.secondaryAnswerBox()}
       </div>
     )
   }
