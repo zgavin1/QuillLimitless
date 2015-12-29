@@ -19,7 +19,7 @@ function findAndFix(state = initialState, action) {
   switch (action.type) {
     case SubmitActions.SUBMIT_FIND:
       return Object.assign({}, state, {
-        score: state.score += 1
+        score: state.score + 1
       })
     default:
       return state

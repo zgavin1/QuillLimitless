@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { submitFind } from '../actions'
 import ScoreBar from "./scorebar/scorebar.jsx";
 import Question from "./question/question.jsx";
+import DevTools from '../utils/devTools';
 
 import "../styles/style.scss";
 
@@ -86,6 +87,7 @@ class Root extends Component {
                     dispatch(submitFind(index))
                   }
         />
+        <DevTools />
       </div>
     )
   }
