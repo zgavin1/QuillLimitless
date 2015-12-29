@@ -12,11 +12,11 @@ export default React.createClass({
   },
 
   splitPrompt: function () {
-    return this.props.data.question.question.prompt.split(" ");
+    return this.props.question.question.prompt.split(" ");
   },
 
   splitAnswer: function () {
-    return this.props.data.question.question.answer.split(" ");
+    return this.props.question.question.answer.split(" ");
   },
 
   getTargetWord: function () {
@@ -102,13 +102,13 @@ export default React.createClass({
   },
 
   generateWordList: function () {
-    if (this.props.data.finished === true) {
+    if (this.props.finished === true) {
       return this.finishedCorrectlyWordList();
     }
-    else if (this.props.data.correct === true) {
+    else if (this.props.correct === true) {
       return this.answeredCorrectlyWordList();
     }
-    else if (this.props.data.correct === false) {
+    else if (this.props.correct === false) {
       return this.answeredIncorrectlyWordList();
     } else {
       return this.beforeAnsweringWordList();
@@ -116,10 +116,10 @@ export default React.createClass({
   },
 
   stateSpecificComponent: function () {
-    if (this.props.data.correct === true) {
+    if (this.props.correct === true) {
       return <h4>Correct</h4>
     }
-    else if (this.props.data.correct === false) {
+    else if (this.props.correct === false) {
       return <h4>Incorrect</h4>
     }
   },
@@ -143,7 +143,7 @@ export default React.createClass({
   },
 
   secondaryAnswerBox: function () {
-    if (this.props.data.correct === true) {
+    if (this.props.correct === true) {
       return (
         <div>
           <h4>What should the correct word be?</h4>
