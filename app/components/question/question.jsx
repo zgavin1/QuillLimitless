@@ -127,7 +127,6 @@ export default React.createClass({
   },
 
   checkWordSubmission: function () {
-    console.log(this.refs)
     const action = submitFix(this.refs.fixInput.value);
     this.props.dispatch(action);
   },
@@ -151,6 +150,7 @@ export default React.createClass({
   },
 
   render: function () {
+    console.log(this.props.score);
     return (
       <div>
         <h2>Question</h2>

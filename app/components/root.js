@@ -78,7 +78,7 @@ class Root extends Component {
         <h1>Quill Limitless</h1>
         <ScoreBar score={score}/>
         <Question
-          question={question}
+          question={question.currentQuestion}
           action={index =>
                     dispatch(submitFind(index))
                   }
