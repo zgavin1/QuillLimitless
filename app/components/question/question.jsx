@@ -1,16 +1,8 @@
 import React from "react";
 import "../../styles/question.scss";
-import { submitFind } from '../../actions';
+import { submitFind, submitFix } from '../../actions';
 
 export default React.createClass({
-  getInitialState: function () {
-    return {submission: null};
-  },
-
-  updateScore: function (direction, index) {
-    this.props.action(direction, index);
-  },
-
   splitPrompt: function () {
     return this.props.question.prompt.split(" ");
   },
@@ -72,7 +64,7 @@ export default React.createClass({
     });
   },
 
-  finishedCorrectlyWordList: function () {
+  fixedCorrectlyWordList: function () {
     const words = this.splitAnswer();
     const correctIndex = this.getTargetWord();
     return words.map((word, index) => {
@@ -135,25 +127,19 @@ export default React.createClass({
   },
 
   checkWordSubmission: function () {
-    if (this.state.submission === this.getAnswer()) {
-      console.log("you got it right");
-      this.updateScore("INCREMENT", 2);
-    }
-    else {
-      console.log("you got it wrong");
-      this.updateScore("DECREMENT", 2);
-    }
+    console.log(this.refs)
+    const action = submitFix(this.refs.fixInput.value);
+    this.props.dispatch(action);
   },
 
   secondaryAnswerBox: function () {
-    if (this.props.correct === true) {
+    if (this.props.question.found === true) {
       return (
         <div>
           <h4>What should the correct word be?</h4>
-          <input placeholder="then" type="text" onChange={this.handleChange}/>
+          <input placeholder="then" type="text" ref="fixInput" onChange={this.handleChange}/>
           <button onClick={this.checkWordSubmission}>Submit</button>
         </div>
-
       )
     }
   },
