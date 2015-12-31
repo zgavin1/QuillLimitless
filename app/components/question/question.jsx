@@ -12,11 +12,11 @@ export default React.createClass({
   },
 
   splitPrompt: function () {
-    return this.props.question.question.prompt.split(" ");
+    return this.props.question.prompt.split(" ");
   },
 
   splitAnswer: function () {
-    return this.props.question.question.answer.split(" ");
+    return this.props.question.answer.split(" ");
   },
 
   getTargetWord: function () {
