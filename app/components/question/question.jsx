@@ -116,11 +116,14 @@ export default React.createClass({
   },
 
   stateSpecificComponent: function () {
-    if (this.props.correct === true) {
+    if (this.props.question.found === true) {
       return <h4>Correct</h4>
     }
-    else if (this.props.correct === false) {
+    else if (this.props.question.found === false) {
       return <h4>Incorrect</h4>
+    }
+    else {
+      return
     }
   },
 
