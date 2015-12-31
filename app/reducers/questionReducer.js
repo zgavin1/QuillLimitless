@@ -1,4 +1,5 @@
-import { SubmitActions } from '../actions'
+import { SubmitActions } from '../actions';
+import Question from '../libs/question';
 
 const initialState = {
   concept: {
@@ -11,7 +12,16 @@ const initialState = {
 }
 
 function question(state = initialState, action) {
+  const question = new Question(state.prompt, state.answer);
   switch (action.type) {
+    case SubmitActions.SUBMIT_FIND:
+      return Object.assign(state, {
+        found: question.checkFind(action.index)
+      })
+      case SubmitActions.SUBMIT_FIX:
+        return Object.assign(state, {
+          fixed: question.checkFix(action.word)
+        })
     default:
       return state
   }
