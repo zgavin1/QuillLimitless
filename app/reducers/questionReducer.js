@@ -16,12 +16,14 @@ function question(state = initialState, action) {
   switch (action.type) {
     case SubmitActions.SUBMIT_FIND:
       return Object.assign(state, {
-        found: question.checkFind(action.index)
+        found: question.checkFind(action.index),
+        submittedFind: action.index
       })
-      case SubmitActions.SUBMIT_FIX:
-        return Object.assign(state, {
-          fixed: question.checkFix(action.word)
-        })
+    case SubmitActions.SUBMIT_FIX:
+      return Object.assign(state, {
+        fixed: question.checkFix(action.word),
+        submittedFix: action.word
+      })
     default:
       return state
   }
