@@ -1,6 +1,6 @@
 import React from "react";
-
 import "../../styles/question.scss";
+import { submitFind } from '../../actions';
 
 export default React.createClass({
   getInitialState: function () {
@@ -44,14 +44,14 @@ export default React.createClass({
     }
   },
 
-  beforeAnsweringWordList: function () {
+  initialWordList: function () {
     const words = this.splitPrompt();
-    this.getTargetWord();
+    // this.getTargetWord();
     return words.map((word, index) => {
       const cb = (i) => {
         const ind = i;
         const call = () => {
-          this.checkWord(ind);
+          this.props.dispatch(submitFind(ind));
         }
         return call;
       }
@@ -59,7 +59,7 @@ export default React.createClass({
     });
   },
 
-  answeredCorrectlyWordList: function () {
+  foundCorrectlyWordList: function () {
     const words = this.splitPrompt();
     const correctIndex = this.getTargetWord();
     return words.map((word, index) => {
@@ -84,14 +84,14 @@ export default React.createClass({
     });
   },
 
-  answeredIncorrectlyWordList: function () {
+  foundIncorrectlyWordList: function () {
     const words = this.splitPrompt();
     const correctIndex = this.getTargetWord();
     return words.map((word, index) => {
       if (index === correctIndex) {
         return <span className="correct">{word.replace(/[{}]/g, "")} </span>
       }
-      else if (index === this.props.data.index) {
+      else if (index === this.props.question.submittedFind) {
         return <span className="incorrect">{word.replace(/[{}]/g, "")} </span>
       }
       else {
@@ -101,17 +101,17 @@ export default React.createClass({
     });
   },
 
-  generateWordList: function () {
-    if (this.props.finished === true) {
-      return this.finishedCorrectlyWordList();
+  generatePrompt: function () {
+    if (this.props.question.fixed === true) {
+      return this.fixedCorrectlyWordList();
     }
-    else if (this.props.correct === true) {
-      return this.answeredCorrectlyWordList();
+    else if (this.props.question.found === true) {
+      return this.foundCorrectlyWordList();
     }
-    else if (this.props.correct === false) {
-      return this.answeredIncorrectlyWordList();
+    else if (this.props.question.found === false) {
+      return this.foundIncorrectlyWordList();
     } else {
-      return this.beforeAnsweringWordList();
+      return this.initialWordList();
     }
   },
 
@@ -157,10 +157,11 @@ export default React.createClass({
 
   render: function () {
     return (
+
       <div>
         <h2>Question</h2>
         {this.stateSpecificComponent()}
-        <p>{this.generateWordList()}</p>
+        <p>{this.generatePrompt()}</p>
         {this.secondaryAnswerBox()}
       </div>
     )

@@ -71,9 +71,7 @@ class Root extends Component {
   // },
 
   render(){
-    console.log("in render");
-    console.log(this.props);
-    const { dispatch, score, question, correct, finished } = this.props;
+    const { dispatch, score, question} = this.props;
 
     return (
       <div>
@@ -81,11 +79,10 @@ class Root extends Component {
         <ScoreBar score={score}/>
         <Question
           question={question}
-          correct={correct}
-          finished={finished}
           action={index =>
                     dispatch(submitFind(index))
                   }
+          dispatch={dispatch}
         />
         <DevTools />
       </div>
@@ -94,12 +91,9 @@ class Root extends Component {
 };
 
 function select(state) {
-  console.log(state);
   return {
     score: state.score,
-    question: state.question,
-    correct: state.correct,
-    finished: state.finished
+    question: state.question
   }
 }
 
