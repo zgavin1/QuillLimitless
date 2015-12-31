@@ -15,15 +15,17 @@ function question(state = initialState, action) {
   const question = new Question(state.prompt, state.answer);
   switch (action.type) {
     case SubmitActions.SUBMIT_FIND:
-      return Object.assign(state, {
+      return Object.assign({}, state, {
         found: question.checkFind(action.index),
         submittedFind: action.index
       })
+      break
     case SubmitActions.SUBMIT_FIX:
-      return Object.assign(state, {
+      return Object.assign({}, state, {
         fixed: question.checkFix(action.word),
         submittedFix: action.word
       })
+      break
     default:
       return state
   }
