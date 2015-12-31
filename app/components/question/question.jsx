@@ -144,14 +144,20 @@ export default React.createClass({
     }
   },
 
+  nextQuestionComponent: function () {
+    if (this.props.question.found === false || (this.props.question.found === true && typeof this.props.question.fixed !== 'undefined')) {
+      return (<a>Next Question</a>)
+    }
+  },
+
   render: function () {
     return (
-
       <div>
         <h2>Question</h2>
         {this.stateSpecificComponent()}
         <p>{this.generatePrompt()}</p>
         {this.secondaryAnswerBox()}
+        {this.nextQuestionComponent()}
       </div>
     )
   }
