@@ -10,6 +10,10 @@ function score(state = initialState, action) {
       return Object.assign({}, state, {
         score: state.score + 1
       })
+    case SubmitActions.SUBMIT_FIX:
+      return Object.assign({}, state, {
+        score: state.score + 1
+      })
     default:
       return state
   }
