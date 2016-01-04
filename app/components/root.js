@@ -5,6 +5,8 @@ import ScoreBar from "./scorebar/scorebar.jsx";
 import Question from "./question/question.jsx";
 import DevTools from '../utils/devTools';
 
+// import "../styles/normalize.scss";
+import "../styles/bootstrap.scss";
 import "../styles/style.scss";
 
 class Root extends Component {
@@ -75,7 +77,6 @@ class Root extends Component {
 
     return (
       <div>
-        <h1>Quill Limitless</h1>
         <ScoreBar score={score}/>
         <Question
           question={question.currentQuestion}
@@ -84,7 +85,7 @@ class Root extends Component {
                   }
           dispatch={dispatch}
         />
-        <DevTools />
+        
       </div>
     )
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/question.scss";
-import { submitFind, submitFix } from '../../actions';
+import { submitFind, submitFix, nextQuestion } from '../../actions';
 
 export default React.createClass({
   splitPrompt: function () {
@@ -134,30 +134,75 @@ export default React.createClass({
   secondaryAnswerBox: function () {
     if (this.props.question.found === true) {
       return (
-        <div>
-          <h4>What should the correct word be?</h4>
-          <input placeholder="then" type="text" ref="fixInput" onChange={this.handleChange}/>
-          <button onClick={this.checkWordSubmission}>Submit</button>
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">What should the correct word be?</h3>
+          </div>
+          <div className="panel-body">
+            <div className="input-group">
+              <input type="text"
+                autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
+                className="form-control"
+                placeholder="then"
+                ref="fixInput"
+                onChange={this.handleChange}/>
+              <span className="input-group-btn">
+                <button className="btn btn-default" type="button" onClick={this.checkWordSubmission}>Submit</button>
+              </span>
+            </div>
+          </div>
         </div>
       )
     }
   },
 
+  nextQuestion: function () {
+    this.props.dispatch(nextQuestion());
+  },
+
   nextQuestionComponent: function () {
     if (this.props.question.found === false || (this.props.question.found === true && typeof this.props.question.fixed !== 'undefined')) {
-      return (<a>Next Question</a>)
+      return (
+        <div className="btn-group btn-group-justified" role="group" aria-label="...">
+          <a className="btn btn-default" onClick={this.nextQuestion}>Next Question</a>
+        </div>
+      )
     }
   },
 
   render: function () {
     console.log(this.props.score);
     return (
-      <div>
-        <h2>Question</h2>
-        {this.stateSpecificComponent()}
-        <p>{this.generatePrompt()}</p>
-        {this.secondaryAnswerBox()}
-        {this.nextQuestionComponent()}
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-12">
+            <h4>{this.props.question.concept.standard}</h4>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-xs-12">
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h3 className="panel-title">Click the word that is incorrect</h3>
+              </div>
+              <div className="panel-body">
+                {this.generatePrompt()}
+              </div>
+            </div>
+            <p></p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12">
+            {this.secondaryAnswerBox()}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12">
+            {this.nextQuestionComponent()}
+          </div>
+        </div>
       </div>
     )
   }
