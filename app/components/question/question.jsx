@@ -134,14 +134,14 @@ export default React.createClass({
   secondaryAnswerBox: function () {
     if (this.props.question.found === true) {
       return (
-        <div className="panel panel-default">
+        <div className={this.fixPanelClass()}>
           <div className="panel-heading">
             <h3 className="panel-title">What should the correct word be?</h3>
           </div>
           <div className="panel-body">
             <div className="input-group">
               <input type="text"
-                autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
+                autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
                 className="form-control"
                 placeholder="then"
                 ref="fixInput"
@@ -160,14 +160,49 @@ export default React.createClass({
     this.props.dispatch(nextQuestion());
   },
 
+  nextQuestionClass: function () {
+    var classy;
+    console.log(this.props.question.found === true && this.props.question.fixed === true);
+    if (this.props.question.found && this.props.question.fixed) {
+      classy = "btn-success"
+    } else {
+      classy = "btn-danger";
+    }
+    return "btn " + classy;
+  },
+
   nextQuestionComponent: function () {
     if (this.props.question.found === false || (this.props.question.found === true && typeof this.props.question.fixed !== 'undefined')) {
       return (
         <div className="btn-group btn-group-justified" role="group" aria-label="...">
-          <a className="btn btn-default" onClick={this.nextQuestion}>Next Question</a>
+          <a className={this.nextQuestionClass()} onClick={this.nextQuestion}>Next Question</a>
         </div>
       )
     }
+  },
+
+  findPanelClass: function () {
+    var classy;
+    if (this.props.question.found === true) {
+      classy = "panel-success"
+    } else if (this.props.question.found === false) {
+      classy = "panel-danger";
+    } else {
+      classy = "panel-default";
+    }
+    return "panel " + classy;
+  },
+
+  fixPanelClass: function () {
+    var classy;
+    if (this.props.question.fixed === true) {
+      classy = "panel-success"
+    } else if (this.props.question.fixed === false) {
+      classy = "panel-danger";
+    } else {
+      classy = "panel-default";
+    }
+    return "panel " + classy;
   },
 
   render: function () {
@@ -182,7 +217,7 @@ export default React.createClass({
 
         <div className="row">
           <div className="col-xs-12">
-            <div className="panel panel-default">
+            <div className={this.findPanelClass()}>
               <div className="panel-heading">
                 <h3 className="panel-title">Click the word that is incorrect</h3>
               </div>
