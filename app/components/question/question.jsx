@@ -208,7 +208,7 @@ export default React.createClass({
   render: function () {
     console.log(this.props.score);
     return (
-      <div className="container-fluid">
+      <div className="container">
         <div className="row">
           <div className="col-sm-12">
             <h4>{this.props.question.concept.standard}</h4>

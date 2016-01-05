@@ -5,6 +5,15 @@ export default [
       conceptName: "Than",
       standard: "4.1g. Commonly Confused Words"
     },
+    answer: "There are more {than} 300 million people in the United States.",
+    prompt: "There are more {then} 300 million people in the United States."
+  },
+  {
+    concept: {
+      name: "Than, Then",
+      conceptName: "Than",
+      standard: "4.1g. Commonly Confused Words"
+    },
     answer: "Her speakers can get much louder {than} mine can.",
     prompt: "Her speakers can get much louder {then} mine can."
   },
