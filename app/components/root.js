@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import React, { Component, PropTypes } from "react";
 import { connect } from 'react-redux'
 import { submitFind, nextQuestion } from '../actions'
