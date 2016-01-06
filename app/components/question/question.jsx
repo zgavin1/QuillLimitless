@@ -206,7 +206,6 @@ export default React.createClass({
   },
 
   render: function () {
-    console.log(this.props.score);
     return (
       <div className="container">
         <div className="row">
