@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { submitFind, nextQuestion } from '../actions'
 import ScoreBar from "./scorebar/scorebar.jsx";
 import Question from "./question/question.jsx";
+import Welcome from "./welcome/welcome.jsx";
+import Exit from "./exit/exit.jsx";
 import DevTools from '../utils/devTools';
 
 // import "../styles/normalize.scss";
@@ -24,10 +26,10 @@ var Root = React.createClass({
 
   stateSpecificComponent: function () {
     if (this.props.question.currentQuestion === undefined && this.props.question.answeredQuestions.length === 0) {
-      return (<a onClick={this.startActivity}>Get started!</a>)
+      return (<Welcome action={this.startActivity} />)
     }
     else if (this.props.question.currentQuestion === undefined && this.props.question.unansweredQuestions.length === 0) {
-      return (<p>You completed the exercise!</p>)
+      return (<Exit />)
     }
     else {
       return (<Question
