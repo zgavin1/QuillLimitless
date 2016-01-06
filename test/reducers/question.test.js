@@ -25,7 +25,7 @@ describe("the question reducer", () => {
     expect(newState.currentQuestion.answer).toEqual(initialState.currentQuestion.answer);
   });
 
-  it("should not change its answer or prompt when submitting a find answer", () => {
+  it("should not change its answer or prompt when submitting a fix answer", () => {
     const action = submitFix("than")
     const newState = questionReducer(initialState, action)
     expect(newState.currentQuestion.prompt).toEqual(initialState.currentQuestion.prompt);

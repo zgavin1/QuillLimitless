@@ -50,7 +50,7 @@ var Root = React.createClass({
 
     return (
       <div>
-        <ScoreBar score={score}/>
+        <ScoreBar answeredQuestions={question.answeredQuestions}/>
         {this.stateSpecificComponent()}
         <DevTools />
       </div>
