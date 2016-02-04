@@ -30,7 +30,7 @@ var Root = React.createClass({
       return (<Welcome action={this.startActivity} />)
     }
     else if (this.props.question.currentQuestion === undefined && this.props.question.unansweredQuestions.length === 0) {
-      return (<Exit />)
+      return (<Exit results={this.props.question.answeredQuestions} dispatch={this.props.dispatch}/>)
     }
     else {
       return (<Question

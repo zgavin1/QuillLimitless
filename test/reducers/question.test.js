@@ -45,7 +45,7 @@ describe("the question reducer", () => {
   })
 
   const findTests = [0, 1, 2, 3, 5, 8, 13]
-findTests.forEach((test) => {
+  findTests.forEach((test) => {
     it("should store the find submission", () => {
       const action = submitFind(test)
       const newState = questionReducer(initialState, action)

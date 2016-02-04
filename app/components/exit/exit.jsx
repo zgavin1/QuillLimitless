@@ -1,4 +1,5 @@
 import React from "react";
+import Results from "../results/results.jsx";
 
 export default React.createClass({
   render: function () {
@@ -8,10 +9,10 @@ export default React.createClass({
           <div className="col-xs-12">
             <div className="panel panel-default">
               <div className="panel-heading">
-                <h3 className="panel-title">Congratulations</h3>
+                <h3 className="panel-title">Congratulations!</h3>
               </div>
               <div className="panel-body">
-                <p>That's all folks!</p>
+                <Results data={this.props} dispatch={this.props.dispatch}/>
               </div>
             </div>
           </div>

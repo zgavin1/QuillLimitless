@@ -1,38 +1,52 @@
 export default [
   {
     concept: {
-      name: "Than, Then",
-      conceptName: "Than",
-      standard: "4.1g. Commonly Confused Words"
+      uid: "1234",
+      name: "Capitalization",
+      conceptName: "Capitalization",
+      standard: "4.1g. Capitalization"
     },
-    answer: "There are more {than} 300 million people in the United States.",
-    prompt: "There are more {then} 300 million people in the United States."
+    answer: "His daughter is going to play in the game on {Sunday}.",
+    prompt: "His daughter is going to play in the game on {sunday}."
   },
   {
     concept: {
-      name: "Than, Then",
-      conceptName: "Than",
-      standard: "4.1g. Commonly Confused Words"
+      uid: "1234",
+      name: "Capitalization",
+      conceptName: "Capitalization",
+      standard: "4.1g. Capitalization"
     },
-    answer: "Her speakers can get much louder {than} mine can.",
-    prompt: "Her speakers can get much louder {then} mine can."
+    answer: "She walked to {the} {mall} yesterday, but it was closed.",
+    prompt: "She walked to {The} {Mall} yesterday, but it was closed."
   },
   {
     concept: {
-      name: "Than, Then",
-      conceptName: "Than",
-      standard: "4.1g. Commonly Confused Words"
+      uid: "1234",
+      name: "Capitalization",
+      conceptName: "Capitalization",
+      standard: "4.1g. Capitalization"
     },
-    answer: "The whole is more {than} the sum of its parts.",
-    prompt: "The whole is more {then} the sum of its parts."
+    answer: "{What} did you do today?",
+    prompt: "{what} did you do today?"
   },
   {
     concept: {
-      name: "Than, Then",
-      conceptName: "Than",
-      standard: "4.1g. Commonly Confused Words"
+      uid: "1234",
+      name: "Capitalization",
+      conceptName: "Capitalization",
+      standard: "4.1g. Capitalization"
     },
-    answer: "There is nowhere I'd rather live {than} New York City.",
-    prompt: "There is nowhere I'd rather live {than} New York City."
+    answer: "{We} will have next Tuesday off.",
+    prompt: "{we} will have next Tuesday off."
+  },
+  {
+    concept: {
+      uid: "1234",
+      name: "Capitalization",
+      conceptName: "Capitalization",
+      standard: "4.1g. Capitalization"
+    },
+    answer: "I am so excited! {Tomorrow} is my birthday.",
+    prompt: "I am so excited! {tomorrow} is my birthday."
   }
 ]
