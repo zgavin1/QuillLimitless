@@ -19740,13 +19740,20 @@
 	    } else if (this.props.question.currentQuestion === undefined && this.props.question.unansweredQuestions.length === 0) {
 	      return _react2.default.createElement(_exit2.default, { results: this.props.question.answeredQuestions, dispatch: this.props.dispatch });
 	    } else {
-	      return _react2.default.createElement(_question2.default, {
+	      return _react2.default.createElement(Edit, {
 	        question: this.props.question.currentQuestion,
 	        action: function action(index) {
 	          return _this.props.dispatch((0, _actions.submitFind)(index));
 	        },
 	        dispatch: this.props.dispatch
 	      });
+	      // return (<Question
+	      //   question={this.props.question.currentQuestion}
+	      //   action={index =>
+	      //             this.props.dispatch(submitFind(index))
+	      //           }
+	      //   dispatch={this.props.dispatch}
+	      // />)
 	    }
 	  },
 

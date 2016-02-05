@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { submitFind, nextQuestion } from '../actions'
 import ScoreBar from "./scorebar/scorebar.jsx";
 import Question from "./question/question.jsx";
+import Edit from "./edit/edit.jsx";
 import Welcome from "./welcome/welcome.jsx";
 import Exit from "./exit/exit.jsx";
 import DevTools from '../utils/devTools';
@@ -33,13 +34,25 @@ var Root = React.createClass({
       return (<Exit results={this.props.question.answeredQuestions} dispatch={this.props.dispatch}/>)
     }
     else {
-      return (<Question
-        question={this.props.question.currentQuestion}
-        action={index =>
-                  this.props.dispatch(submitFind(index))
-                }
-        dispatch={this.props.dispatch}
-      />)
+      return (
+        <Edit
+          question={this.props.question.currentQuestion}
+          action={index =>
+                      this.props.dispatch(submitFind(index))
+                    }
+          dispatch={this.props.dispatch}
+          >
+
+
+        </Edit>
+      )
+      // return (<Question
+      //   question={this.props.question.currentQuestion}
+      //   action={index =>
+      //             this.props.dispatch(submitFind(index))
+      //           }
+      //   dispatch={this.props.dispatch}
+      // />)
     }
   },
 
