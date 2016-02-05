@@ -16,8 +16,8 @@ export default [
       conceptName: "Capitalization",
       standard: "4.1g. Capitalization"
     },
-    answer: "She walked to {the} {mall} yesterday, but it was closed.",
-    prompt: "She walked to {The} {Mall} yesterday, but it was closed."
+    answer: "She walked to the {mall} yesterday, but it was closed.",
+    prompt: "She walked to the {Mall} yesterday, but it was closed."
   },
   {
     concept: {

@@ -53,7 +53,6 @@ var Root = React.createClass({
       <div>
         <ScoreBar answeredQuestions={question.answeredQuestions}/>
         {this.stateSpecificComponent()}
-        <DevTools />
       </div>
     )
   }

@@ -28,6 +28,11 @@ export default React.createClass({
     return words[this.getTargetWord()].replace(/[{}]/g, "")
   },
 
+  getFound: function () {
+    const words = this.splitPrompt();
+    return words[this.getTargetWord()].replace(/[{}]/g, "")
+  },
+
   checkWord: function (index) {
     if (index === this.getTargetWord()) {
       this.updateScore("INCREMENT", 1, index);
@@ -121,7 +126,6 @@ export default React.createClass({
 
   handleChange: function(event) {
     this.setState({submission: event.target.value}, function () {
-      console.log(this.state.submission);
     });
 
   },
@@ -143,7 +147,7 @@ export default React.createClass({
               <input type="text"
                 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
                 className="form-control"
-                placeholder="then"
+                placeholder={this.getFound()}
                 ref="fixInput"
                 onChange={this.handleChange}/>
               <span className="input-group-btn">
