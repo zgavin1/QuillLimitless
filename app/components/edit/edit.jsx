@@ -31,7 +31,7 @@ export default React.createClass({
 
   stateSpecificComponent: function () {
     if (this.state) {
-      return (<p autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">Score: Found {this.state.score.found} Errors, Fixed {this.state.score.fixed} errors</p>)
+      return (<p autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false">Score: Found {this.state.score.found} Errors, Fixed {this.state.score.fixed} errors</p>)
     }
   },
 
