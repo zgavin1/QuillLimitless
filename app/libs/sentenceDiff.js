@@ -44,6 +44,9 @@ export default class WordDiffer {
           obj.correct = true
         }
         return obj
+      }),
+      extraneous: subs.deletions.filter((obj) => {
+        return !!(_.findWhere(exp.deletions, obj))
       })
     }
   }
@@ -52,7 +55,8 @@ export default class WordDiffer {
     const results = this.markSubmission()
     return {
       found: _.where(results.deletions, {correct: true}).length,
-      fixed: _.where(results.additions, {correct: true}).length
+      fixed: _.where(results.additions, {correct: true}).length,
+      extra: results.extraneous.length
     }
   }
 

@@ -3,10 +3,19 @@ import sentenceDiff from '../../libs/sentenceDiff';
 import { nextQuestion } from '../../actions';
 
 export default React.createClass({
+  componentDidMount: function () {
+    window.hi = this.refs.submission;
+    this.refs.submission.blur()
+    this.refs.submission.focus()
+  },
+
+  componentDidUpdate: function() {
+    this.refs.submission.focus()
+  },
 
   generateInput: function () {
     return (
-      <p ref="submission" contentEditable="true">{this.props.question.prompt}</p>
+      <p className="inputText" ref="submission" contentEditable="true">{this.props.question.prompt}</p>
     )
   },
 
@@ -22,7 +31,7 @@ export default React.createClass({
 
   stateSpecificComponent: function () {
     if (this.state) {
-      return (<p>Score: Found {this.state.score.found} Errors, Fixed {this.state.score.fixed} errors</p>)
+      return (<p autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">Score: Found {this.state.score.found} Errors, Fixed {this.state.score.fixed} errors</p>)
     }
   },
 
@@ -57,23 +66,10 @@ export default React.createClass({
     return (
       <div className="container">
         <div className="row">
-          <div className="col-sm-12">
-            <h4>{this.props.question.concept.standard}</h4>
-          </div>
-        </div>
-        <div className="row">
           <div className="col-xs-12">
-            <div className={this.panelClass()}>
-              <div className="panel-heading">
-                <h3 className="panel-title">Edit the sentence</h3>
-              </div>
-              <div className="panel-body">
-                {this.generateInput()}
-                <button onClick={this.checkSubmission}>Check Answer</button>
-                {this.stateSpecificComponent()}
-              </div>
-            </div>
-
+            {this.generateInput()}
+            <button className="btn btn-default" onClick={this.checkSubmission}>Check Answer</button>
+            {this.stateSpecificComponent()}
           </div>
         </div>
         <div className="row">

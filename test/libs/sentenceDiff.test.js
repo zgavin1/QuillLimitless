@@ -42,11 +42,18 @@ describe("initializing a question", () => {
 
   it("can return the number of correct answers", () => {
     expect(wordDiff.calcScores().found).toEqual(1)
+    expect(wordDiff.calcScores().extra).toEqual(0)
     expect(incorrectWordDiff.calcScores().found).toEqual(0)
+    expect(incorrectWordDiff.calcScores().extra).toEqual(0)
   })
 
   it("can return the number of correct answers as a fraction", () => {
     expect(wordDiff.fractionScores().found).toEqual("1/1")
     expect(incorrectWordDiff.fractionScores().found).toEqual("0/1")
+  })
+
+  it("can return the number of unessacary edits", () => {
+    const extraWordDiff = new WordDiff(prompt, answer, "Hes over there reading.")
+    expect(extraWordDiff.calcScores().extra).toEqual(1)
   })
 })
