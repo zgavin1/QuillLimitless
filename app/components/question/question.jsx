@@ -1,36 +1,40 @@
 import React from "react";
 import "../../styles/question.scss";
 import { submitFind, submitFix, nextQuestion } from '../../actions';
+import {sentenceSplitter, getTargetIndex, getTargetPhrase} from '../../libs/sentenceSplitterV2';
 
 export default React.createClass({
   splitPrompt: function () {
-    return this.props.question.prompt.split(" ");
+    return sentenceSplitter(this.props.question.prompt);
   },
 
   splitAnswer: function () {
-    return this.props.question.answer.split(" ");
+    return sentenceSplitter(this.props.question.answer);
   },
 
   getTargetWord: function () {
-    const words = this.splitPrompt();
-    let j = 0;
-    for (let i = 0; i < words.length; i++) {
-      if (words[i][0] === "{") {
-        j = i;
-        break;
-      }
-    }
-    return j;
+    return getTargetIndex(this.props.question.prompt)
+    // const words = this.splitPrompt();
+    // let j = 0;
+    // for (let i = 0; i < words.length; i++) {
+    //   if (words[i][0] === "{") {
+    //     j = i;
+    //     break;
+    //   }
+    // }
+    // return j;
   },
 
   getAnswer: function () {
-    const words = this.splitAnswer();
-    return words[this.getTargetWord()].replace(/[{}]/g, "")
+    // const words = this.splitAnswer();
+    // return words[this.getTargetWord()].replace(/[{}]/g, "")
+    getTargetPhrase(this.props.question.answer)
   },
 
   getFound: function () {
-    const words = this.splitPrompt();
-    return words[this.getTargetWord()].replace(/[{}]/g, "")
+    // const words = this.splitPrompt();
+    // return words[this.getTargetWord()].replace(/[{}]/g, "")
+    getTargetPhrase(this.props.question.prompt)
   },
 
   checkWord: function (index) {
@@ -146,8 +150,9 @@ export default React.createClass({
           <div >
             <div className="input-group">
               <input type="text"
-                autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
                 className="form-control"
+                autoFocus
                 placeholder={this.getFound()}
                 ref="fixInput"
                 onChange={this.handleChange}/>

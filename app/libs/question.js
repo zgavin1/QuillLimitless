@@ -1,4 +1,4 @@
-import {getTargetIndex, getTargetWord, sentenceSplitter} from './sentence.js'
+import {getTargetIndex, getTargetPhrase, sentenceSplitter} from './sentenceSplitterV2.js'
 
 export default class Question {
   constructor(prompt, answer) {
@@ -16,7 +16,7 @@ export default class Question {
   }
 
   checkFix(submission) {
-    return submission === getTargetWord(this.answer);
+    return submission === getTargetPhrase(this.answer);
   }
 
   submitFix(submission) {
