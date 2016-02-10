@@ -232,9 +232,6 @@ export default React.createClass({
         <div className="row">
           <div className="col-xs-12">
             <div>
-              <div>
-                <h4>Click the part of the sentence that is incorrect</h4>
-              </div>
               <div >
                 {this.generatePrompt()}
               </div>
