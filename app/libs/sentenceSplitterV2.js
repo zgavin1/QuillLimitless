@@ -6,9 +6,9 @@ export function sentenceSplitter(sentence){
   var afterBrace = sentence.split("{")[1]
   var target = afterBrace.split("}")[0]
   var afterTarget = afterBrace.split("}")[1]
-  var returner = beforeBrace.split(" ");
+  var returner = beforeBrace.split(/(\S+\s+)/).filter(function(n) {return n});
   returner.push("{" + target + "}");
-  returner = returner.concat(afterTarget.split(" "));
+  returner = returner.concat(afterTarget.split(/(\S+\s+)/).filter(function(n) {return n}));
   return returner.filter(function(n){ return n != '' }); ;
 }
 

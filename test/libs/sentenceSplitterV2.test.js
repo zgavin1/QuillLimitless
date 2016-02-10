@@ -8,7 +8,7 @@ describe("sentenceSplitter", () => {
 
   it("should return a list of words with the spaces removed", () => {
     const provided = "You {shall not} pass";
-    const expected = ["You", "{shall not}", "pass"];
+    const expected = ["You ", "{shall not}", " pass"];
     expect(sentenceSplitter(provided)).toEqual(expected);
   })
 })

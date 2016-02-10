@@ -56,7 +56,7 @@ export default React.createClass({
         }
         return call;
       }
-      return <span onClick={cb(index)}>{word.replace(/[{}]/g, "")} </span>
+      return <span onClick={cb(index)}>{word.replace(/[{}]/g, "")}</span>
     });
   },
 
@@ -65,9 +65,9 @@ export default React.createClass({
     const correctIndex = this.getTargetWord();
     return words.map((word, index) => {
       if (index === correctIndex) {
-        return <span className="correct">{word.replace(/[{}]/g, "")} </span>
+        return <span className="correct">{word.replace(/[{}]/g, "")}</span>
       } else {
-        return <span>{word.replace(/[{}]/g, "")} </span>
+        return <span>{word.replace(/[{}]/g, "")}</span>
       }
 
     });
@@ -78,9 +78,9 @@ export default React.createClass({
     const correctIndex = this.getTargetWord();
     return words.map((word, index) => {
       if (index === correctIndex) {
-        return <span className="correct">{word.replace(/[{}]/g, "")} </span>
+        return <span className="correct">{word.replace(/[{}]/g, "")}</span>
       } else {
-        return <span>{word.replace(/[{}]/g, "")} </span>
+        return <span>{word.replace(/[{}]/g, "")}</span>
       }
     });
   },
@@ -90,13 +90,13 @@ export default React.createClass({
     const correctIndex = this.getTargetWord();
     return words.map((word, index) => {
       if (index === correctIndex) {
-        return <span className="correct">{word.replace(/[{}]/g, "")} </span>
+        return <span className="correct">{word.replace(/[{}]/g, "")}</span>
       }
       else if (index === this.props.question.submittedFind) {
-        return <span className="incorrect">{word.replace(/[{}]/g, "")} </span>
+        return <span className="incorrect">{word.replace(/[{}]/g, "")}</span>
       }
       else {
-        return <span>{word.replace(/[{}]/g, "")} </span>
+        return <span>{word.replace(/[{}]/g, "")}</span>
       }
 
     });
@@ -151,13 +151,13 @@ export default React.createClass({
             <div className="input-group">
               <input type="text"
                 autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
-                className="form-control"
+                className="form-control input-lg"
                 autoFocus
                 placeholder={this.getFound()}
                 ref="fixInput"
                 onChange={this.handleChange}/>
               <span className="input-group-btn">
-                <button className="btn btn-default" type="button" onClick={this.checkWordSubmission}>Submit</button>
+                <button className="btn btn-default btn-lg" type="button" onClick={this.checkWordSubmission}>Submit</button>
               </span>
             </div>
           </div>
@@ -185,7 +185,7 @@ export default React.createClass({
   nextQuestionComponent: function () {
     if (this.props.question.found === false || (this.props.question.found === true && typeof this.props.question.fixed !== 'undefined')) {
       return (
-        <div className="btn-group btn-group-justified" role="group" aria-label="...">
+        <div className="btn-group btn-group-lg btn-group-justified" role="group" aria-label="...">
           <a className={this.nextQuestionClass()} onClick={this.nextQuestion}>Next Question</a>
         </div>
       )
