@@ -28,13 +28,13 @@ export default React.createClass({
   getAnswer: function () {
     // const words = this.splitAnswer();
     // return words[this.getTargetWord()].replace(/[{}]/g, "")
-    getTargetPhrase(this.props.question.answer)
+    return getTargetPhrase(this.props.question.answer)
   },
 
   getFound: function () {
     // const words = this.splitPrompt();
     // return words[this.getTargetWord()].replace(/[{}]/g, "")
-    getTargetPhrase(this.props.question.prompt)
+    return getTargetPhrase(this.props.question.prompt)
   },
 
   checkWord: function (index) {
