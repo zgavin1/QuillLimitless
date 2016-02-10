@@ -134,9 +134,17 @@ export default React.createClass({
 
   },
 
+  handleInput: function(event) {
+    if (event.keyCode === 13) {
+      this.checkWordSubmission();
+      this.refs.fixInput.blur()
+    }
+  },
+
   checkWordSubmission: function () {
     const action = submitFix(this.refs.fixInput.value);
     this.props.dispatch(action);
+
   },
 
   secondaryAnswerBox: function () {
@@ -155,7 +163,9 @@ export default React.createClass({
                 autoFocus
                 placeholder={this.getFound()}
                 ref="fixInput"
-                onChange={this.handleChange}/>
+                onKeyDown={this.handleInput}
+                onChange={this.handleChange}
+                />
               <span className="input-group-btn">
                 <button className="btn btn-default btn-lg" type="button" onClick={this.checkWordSubmission}>Submit</button>
               </span>
