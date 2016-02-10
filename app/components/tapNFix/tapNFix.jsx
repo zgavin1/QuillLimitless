@@ -3,6 +3,12 @@ import "../../styles/question.scss";
 import { submitFind, submitFix, nextQuestion } from '../../actions';
 
 export default React.createClass({
+  getInitialState: function () {
+
+    var wordList = this.splitPrompt().map((w) => {return {word: w}})
+    return {wordList: wordList}
+  },
+
   splitPrompt: function () {
     return this.props.question.prompt.split(" ");
   },
@@ -42,9 +48,10 @@ export default React.createClass({
   },
 
   initialWordList: function () {
-    const words = this.splitPrompt();
+    // const words = this.splitPrompt();
     // this.getTargetWord();
-    return words.map((word, index) => {
+    console.log(this.state)
+    return this.state.wordList.map((word, index) => {
       const cb = (i) => {
         const ind = i;
         const call = () => {
@@ -52,7 +59,7 @@ export default React.createClass({
         }
         return call;
       }
-      return <span onClick={cb(index)}>{word.replace(/[{}]/g, "")} </span>
+      return <span key={index} onClick={cb(index)}>{word.word} </span>
     });
   },
 
@@ -138,25 +145,16 @@ export default React.createClass({
   secondaryAnswerBox: function () {
     if (this.props.question.found === true) {
       return (
-        <div >
-          <div >
-            <h3 className="panel-title">What should the correct word be?</h3>
-            <br/>
-          </div>
-          <div >
-            <div className="input-group">
-              <input type="text"
-                autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-                className="form-control"
-                placeholder={this.getFound()}
-                ref="fixInput"
-                onChange={this.handleChange}/>
-              <span className="input-group-btn">
-                <button className="btn btn-default" type="button" onClick={this.checkWordSubmission}>Submit</button>
-              </span>
-            </div>
-          </div>
-          <br/>
+        <div className="input-group" style={{marginTop: 10}}>
+          <input type="text"
+            autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
+            className="form-control"
+            placeholder={this.getFound()}
+            ref="fixInput"
+            onChange={this.handleChange}/>
+          <span className="input-group-btn">
+            <button className="btn btn-default" type="button" onClick={this.checkWordSubmission}>Submit</button>
+          </span>
         </div>
       )
     }
@@ -202,7 +200,7 @@ export default React.createClass({
   fixPanelClass: function () {
     var classy;
     if (this.props.question.fixed === true) {
-      classy = "panel-success"
+      classy = "panel-success";
     } else if (this.props.question.fixed === false) {
       classy = "panel-danger";
     } else {
@@ -216,15 +214,7 @@ export default React.createClass({
       <div className="container">
         <div className="row">
           <div className="col-xs-12">
-            <div>
-              <div>
-                <h4>Click the part of the sentence that is incorrect</h4>
-              </div>
-              <div >
-                {this.generatePrompt()}
-              </div>
-            </div>
-            <p></p>
+            {this.generatePrompt()}
           </div>
         </div>
         <div className="row">

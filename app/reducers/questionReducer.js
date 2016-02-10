@@ -1,6 +1,6 @@
 import { SubmitActions } from '../actions';
 import Question from '../libs/question';
-import testQuestions from '../utils/v2Questions';
+import testQuestions from '../utils/v3Questions';
 
 const initialState = {
   answeredQuestions: [],
