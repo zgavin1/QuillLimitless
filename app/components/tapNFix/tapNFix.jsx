@@ -55,7 +55,9 @@ export default React.createClass({
       const cb = (i) => {
         const ind = i;
         const call = () => {
-          this.props.dispatch(submitFind(ind));
+          // this.props.dispatch(submitFind(ind));
+          wordList
+          this.setState
         }
         return call;
       }
