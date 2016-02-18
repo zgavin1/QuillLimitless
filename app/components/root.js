@@ -1,18 +1,20 @@
 import 'babel-polyfill';
 import React, { Component, PropTypes } from "react";
 import { connect } from 'react-redux'
-import { submitFind, nextQuestion } from '../actions'
+import { submitFind, nextQuestion, loadData } from '../actions'
 import ScoreBar from "./scorebar/scorebar.jsx";
 import Question from "./question/question.jsx";
 import Edit from "./edit/edit.jsx";
 import TapNFix from './tapNFix/tapNFix.jsx'
+import SATPrep from './satprep/satprep.jsx'
 import Welcome from "./welcome/welcome.jsx";
 import Exit from "./exit/exit.jsx";
 import DevTools from '../utils/devTools';
-
+import ProgressBar from './progressBar/progressBar.jsx'
 // import "../styles/normalize.scss";
 import "../styles/bootstrap.scss";
 import "../styles/style.scss";
+import questions from "../utils/v5Questions.js";
 
 var Root = React.createClass({
   // select: function(state) {
@@ -23,6 +25,9 @@ var Root = React.createClass({
   // },
 
   startActivity: function () {
+    const data = questions;
+    const loadDataActions = loadData(data);
+    this.props.dispatch(loadDataActions);
     const action = nextQuestion();
     this.props.dispatch(action);
   },
@@ -47,7 +52,14 @@ var Root = React.createClass({
       //
       //   </TapNFix>
       // )
-      return (<Question
+      // return (<Question
+      //   question={this.props.question.currentQuestion}
+      //   action={index =>
+      //             this.props.dispatch(submitFind(index))
+      //           }
+      //   dispatch={this.props.dispatch}
+      // />
+      return (<SATPrep
         question={this.props.question.currentQuestion}
         action={index =>
                   this.props.dispatch(submitFind(index))
@@ -65,6 +77,7 @@ var Root = React.createClass({
 
     return (
       <div>
+        <ProgressBar questions={question} />
         {this.stateSpecificComponent()}
       </div>
     )

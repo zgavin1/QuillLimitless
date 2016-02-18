@@ -58,13 +58,13 @@
 
 	var _root2 = _interopRequireDefault(_root);
 
-	var _configureStore = __webpack_require__(629);
+	var _configureStore = __webpack_require__(630);
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
 	var _reactRedux = __webpack_require__(349);
 
-	var _combined = __webpack_require__(630);
+	var _combined = __webpack_require__(631);
 
 	var _combined2 = _interopRequireDefault(_combined);
 
@@ -19715,9 +19715,13 @@
 
 	var _devTools2 = _interopRequireDefault(_devTools);
 
-	__webpack_require__(625);
+	var _progressBar = __webpack_require__(625);
 
-	__webpack_require__(627);
+	var _progressBar2 = _interopRequireDefault(_progressBar);
+
+	__webpack_require__(626);
+
+	__webpack_require__(628);
 
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
@@ -19777,7 +19781,7 @@
 	    var score = _props.score;
 	    var question = _props.question;
 
-	    return _react2.default.createElement('div', null, this.stateSpecificComponent());
+	    return _react2.default.createElement('div', null, _react2.default.createElement(_progressBar2.default, { questions: question }), this.stateSpecificComponent());
 	  }
 	});
 
@@ -26413,7 +26417,7 @@
 	  },
 
 	  render: function render() {
-	    return _react2.default.createElement("div", { className: "container" }, _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-xs-12" }, _react2.default.createElement("div", null, _react2.default.createElement("div", null, _react2.default.createElement("h4", null, "Click the part of the sentence that is incorrect")), _react2.default.createElement("div", null, this.generatePrompt())), _react2.default.createElement("p", null))), _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-xs-12" }, this.secondaryAnswerBox())), _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-xs-12" }, this.nextQuestionComponent())));
+	    return _react2.default.createElement("div", { className: "container" }, _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-xs-12" }, _react2.default.createElement("div", null, _react2.default.createElement("div", null, this.generatePrompt())), _react2.default.createElement("p", null))), _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-xs-12" }, this.secondaryAnswerBox())), _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-xs-12" }, this.nextQuestionComponent())));
 	  }
 	});
 
@@ -40650,10 +40654,70 @@
 /* 625 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { default: obj };
+	}
+
+	exports.default = _react2.default.createClass({
+	  displayName: "progressBar",
+
+	  calculateProgress: function calculateProgress() {
+	    if (this.props.questions.answeredQuestions.length > 0) {
+	      return this.calculateOneQuestionWidth() * this.props.questions.answeredQuestions.length;
+	    } else {
+	      return 0;
+	    }
+	  },
+
+	  calculateTotalNumberOfQuestions: function calculateTotalNumberOfQuestions() {
+	    var count = this.props.questions.answeredQuestions.length + this.props.questions.unansweredQuestions.length;
+	    if (this.props.questions.currentQuestion) {
+	      count += 1;
+	    }
+	    return count;
+	  },
+
+	  calculateOneQuestionWidth: function calculateOneQuestionWidth() {
+	    return 100 / this.calculateTotalNumberOfQuestions();
+	  },
+
+	  calculateCurrentQuestionWidth: function calculateCurrentQuestionWidth() {
+	    if (this.props.questions.currentQuestion) {
+	      return this.calculateOneQuestionWidth();
+	    } else {
+	      return 0;
+	    }
+	  },
+
+	  render: function render() {
+	    return _react2.default.createElement("div", { className: "container", style: { marginTop: 20 } }, _react2.default.createElement("div", { className: "progress" }, _react2.default.createElement("div", { className: "progress-bar progress-bar-success",
+	      style: { width: this.calculateProgress() + "%" } }, _react2.default.createElement("span", { className: "sr-only" }, "35% Complete (success)")), _react2.default.createElement("div", { className: "progress-bar progress-bar-success",
+	      style: { width: this.calculateCurrentQuestionWidth() + "%" } }, _react2.default.createElement("span", { className: "sr-only" }, "20% Complete (warning)"))));
+	  }
+	});
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "progressBar.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 626 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(626);
+	var content = __webpack_require__(627);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(373)(content, {});
@@ -40673,7 +40737,7 @@
 	}
 
 /***/ },
-/* 626 */
+/* 627 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(372)();
@@ -40687,13 +40751,13 @@
 
 
 /***/ },
-/* 627 */
+/* 628 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(628);
+	var content = __webpack_require__(629);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(373)(content, {});
@@ -40713,7 +40777,7 @@
 	}
 
 /***/ },
-/* 628 */
+/* 629 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(372)();
@@ -40721,13 +40785,13 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Lato|PT+Mono);", ""]);
 
 	// module
-	exports.push([module.id, "body {\n  padding-top: 0px; }\n\n.inputText {\n  font-size: 24px; }\n\nspan {\n  font-size: 32px;\n  font-family: 'PT Mono'; }\n\ninput {\n  font-family: 'PT Mono';\n  font-size: 24px; }\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: 'Lato', sans-serif;\n  color: #3d3d3d; }\n", "", {"version":3,"sources":["/./app/styles/style.scss"],"names":[],"mappings":"AAEA;EACE,iBAAiB,EAClB;;AAED;EACE,gBAAgB,EACjB;;AAED;EACE,gBAAgB;EAChB,uBACD,EAAC;;AAEF;EACE,uBAAuB;EACvB,gBAAgB,EACjB;;AAED;EACE,gCAAgC;EAChC,eAAe,EAChB","file":"style.scss","sourcesContent":["@import url(https://fonts.googleapis.com/css?family=Lato|PT+Mono);\n\nbody {\n  padding-top: 0px;\n}\n\n.inputText {\n  font-size: 24px;\n}\n\nspan {\n  font-size: 32px;\n  font-family: 'PT Mono'\n}\n\ninput {\n  font-family: 'PT Mono';\n  font-size: 24px;\n}\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: 'Lato', sans-serif;\n  color: #3d3d3d;\n}\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "body {\n  padding-top: 0px; }\n\n.inputText {\n  font-size: 24px; }\n\nspan {\n  font-size: 28px;\n  font-family: 'PT Mono'; }\n\ninput {\n  font-family: 'PT Mono';\n  font-size: 24px; }\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: 'Lato', sans-serif;\n  color: #3d3d3d; }\n", "", {"version":3,"sources":["/./app/styles/style.scss"],"names":[],"mappings":"AAEA;EACE,iBAAiB,EAClB;;AAED;EACE,gBAAgB,EACjB;;AAED;EACE,gBAAgB;EAChB,uBACD,EAAC;;AAEF;EACE,uBAAuB;EACvB,gBAAgB,EACjB;;AAED;EACE,gCAAgC;EAChC,eAAe,EAChB","file":"style.scss","sourcesContent":["@import url(https://fonts.googleapis.com/css?family=Lato|PT+Mono);\n\nbody {\n  padding-top: 0px;\n}\n\n.inputText {\n  font-size: 24px;\n}\n\nspan {\n  font-size: 28px;\n  font-family: 'PT Mono'\n}\n\ninput {\n  font-family: 'PT Mono';\n  font-size: 24px;\n}\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: 'Lato', sans-serif;\n  color: #3d3d3d;\n}\n"],"sourceRoot":"webpack://"}]);
 
 	// exports
 
 
 /***/ },
-/* 629 */
+/* 630 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -40741,7 +40805,7 @@
 
 	var _redux = __webpack_require__(356);
 
-	var _combined = __webpack_require__(630);
+	var _combined = __webpack_require__(631);
 
 	var _combined2 = _interopRequireDefault(_combined);
 
@@ -40786,7 +40850,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "configureStore.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 630 */
+/* 631 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -40801,11 +40865,11 @@
 
 	var _actions = __webpack_require__(367);
 
-	var _scoreReducer = __webpack_require__(631);
+	var _scoreReducer = __webpack_require__(632);
 
 	var _scoreReducer2 = _interopRequireDefault(_scoreReducer);
 
-	var _questionReducer = __webpack_require__(632);
+	var _questionReducer = __webpack_require__(633);
 
 	var _questionReducer2 = _interopRequireDefault(_questionReducer);
 
@@ -40823,7 +40887,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "combined.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 631 */
+/* 632 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -40863,7 +40927,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "scoreReducer.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 632 */
+/* 633 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -40876,13 +40940,13 @@
 
 	var _actions = __webpack_require__(367);
 
-	var _question = __webpack_require__(633);
+	var _question = __webpack_require__(634);
 
 	var _question2 = _interopRequireDefault(_question);
 
-	var _v3Questions = __webpack_require__(634);
+	var _v4Questions = __webpack_require__(635);
 
-	var _v3Questions2 = _interopRequireDefault(_v3Questions);
+	var _v4Questions2 = _interopRequireDefault(_v4Questions);
 
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
@@ -40890,7 +40954,7 @@
 
 	var initialState = {
 	  answeredQuestions: [],
-	  unansweredQuestions: _v3Questions2.default
+	  unansweredQuestions: _v4Questions2.default
 	};
 
 	function question() {
@@ -40936,7 +41000,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "questionReducer.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 633 */
+/* 634 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -41005,7 +41069,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "question.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 634 */
+/* 635 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -41017,61 +41081,88 @@
 	});
 	exports.default = [{
 	  concept: {
-	    uid: "1234",
+	    uid: "1",
 	    name: "Capitalization",
 	    conceptName: "Capitalization",
 	    standard: "4.1g. Capitalization"
 	  },
-	  answer: "His daughter is going to play in the game on {Sunday}.",
-	  prompt: "His daughter is going to play in the game on {sunday}."
+	  answer: "Dear Mr. {Smith},",
+	  prompt: "Dear Mr. {smith},"
 	}, {
 	  concept: {
-	    uid: "1234",
+	    uid: "2",
+	    name: "Your vs. You're",
+	    conceptName: "Your vs. You're",
+	    standard: "4.1g. Capitalization (Difficult)"
+	  },
+	  answer: "I am writing in response to {your} advertisment seeking a person with experience in construction.",
+	  prompt: "I am writing in response to {you're} advertisment seeking a person with experience in construction."
+	}, {
+	  concept: {
+	    uid: "3",
+	    name: "An",
+	    conceptName: "An",
+	    standard: "4.1g. Capitalization (Difficult)"
+	  },
+	  answer: "I believe I am {an} ideal candiate for this position.",
+	  prompt: "I believe I am {a} ideal candiate for this position."
+	}, {
+	  concept: {
+	    uid: "4",
+	    name: "Adverb",
+	    conceptName: "Adverb",
+	    standard: "4.1g. Capitalization (Difficult)"
+	  },
+	  answer: "{Currently}, I am responsible for the maintenance of a large office building.",
+	  prompt: "{Current}, I am responsible for the maintenance of a large office building."
+	}, {
+	  concept: {
+	    uid: "1",
 	    name: "Capitalization",
 	    conceptName: "Capitalization",
 	    standard: "4.1g. Capitalization (Difficult)"
 	  },
-	  answer: "We were not able to use any of the {pencils: red, green, blue, or gold.}",
-	  prompt: "We were not able to use any of the {pencils red green blue or gold.}"
+	  answer: "{I} possess strong leadership and communication skills.",
+	  prompt: "{i} possess strong leadership and communication skills."
 	}, {
 	  concept: {
-	    uid: "1234",
-	    name: "Capitalization",
-	    conceptName: "Capitalization",
+	    uid: "5",
+	    name: "Preposition (With)",
+	    conceptName: "Preposition (With)",
 	    standard: "4.1g. Capitalization (Difficult)"
 	  },
-	  answer: "“Where would you want to go{?}” asked Sarah.",
-	  prompt: "“Where would you want to go{,}” asked Sarah."
+	  answer: "I have experience working {with} construction tools.",
+	  prompt: "I have experience working {on} construction tools."
 	}, {
 	  concept: {
-	    uid: "1234",
-	    name: "Capitalization",
-	    conceptName: "Capitalization",
+	    uid: "6",
+	    name: "Possessives (Commonly Confused Words)",
+	    conceptName: "Possessives (Commonly Confused Words)",
 	    standard: "4.1g. Capitalization (Difficult)"
 	  },
-	  answer: "We rented the movie {Harry Potter}. It is my favorite. What is yours?",
-	  prompt: "We rented the movie {harry potter}. It is my favorite. What is yours?"
+	  answer: "I am enthusiastic about your {company's} growth and success and I would appreciate the chance to contribute to it.",
+	  prompt: "I am enthusiastic about your {companies} growth and success and I would appreciate the chance to contribute to it."
 	}, {
 	  concept: {
-	    uid: "1234",
-	    name: "Capitalization",
-	    conceptName: "Capitalization",
+	    uid: "7",
+	    name: "Punctuation",
+	    conceptName: "Punctuation",
 	    standard: "4.1g. Capitalization (Difficult)"
 	  },
-	  answer: "She speaks {loose} French.",
-	  prompt: "She speaks {lose} French."
+	  answer: "I have attatched my resume for your {consideration.}",
+	  prompt: "I have attatched my resume for your {consideration}"
 	}, {
 	  concept: {
-	    uid: "1234",
-	    name: "Capitalization",
-	    conceptName: "Capitalization",
+	    uid: "8",
+	    name: "Progressive Verb",
+	    conceptName: "Progressive Verb",
 	    standard: "4.1g. Capitalization (Difficult)"
 	  },
-	  answer: "{Isn't} it going to rain on Saturday.",
-	  prompt: "{Isnt} it going to rain on Saturday."
+	  answer: "Thank you and I look forward to {discussing} this opportunity with you further. ",
+	  prompt: "Thank you and I look forward to {discuss} this opportunity with you further. "
 	}];
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "v3Questions.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/donald/Programming/Javascript/QuillLimitless/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "v4Questions.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ]);

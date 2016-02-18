@@ -11,7 +11,7 @@ export default React.createClass({
                 <h3 className="panel-title">Welcome to Quill Limitless</h3>
               </div>
               <div className="panel-body">
-                <a onClick={this.props.action}>Get started!</a>
+                <a onClick={this.props.action}>SAT PREP</a>
               </div>
             </div>
           </div>

@@ -57,7 +57,7 @@ export default React.createClass({
           <thead>
             <tr>
               <th>Concept</th>
-              <th>Total<br/>Answered</th>
+              <th>Total Answered</th>
               <th>Correct</th>
               <th>Incorrect</th>
             </tr>
@@ -104,7 +104,6 @@ export default React.createClass({
   render: function() {
     return (
       <div>
-      <h3>You completed the digraphs activity. We'll now generate a personalized learning plan tailored to your needs.</h3>
       <h3>{this.generatePercentage()} Correct</h3>
       {this.conceptsToRows()}
       {this.returnButton()}

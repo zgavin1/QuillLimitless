@@ -1,10 +1,10 @@
 import { SubmitActions } from '../actions';
 import Question from '../libs/question';
-import testQuestions from '../utils/v3Questions';
+import testQuestions from '../utils/v5Questions';
 
 const initialState = {
   answeredQuestions: [],
-  unansweredQuestions: testQuestions
+  unansweredQuestions: []
 }
 
 function question(state = initialState, action) {
@@ -14,6 +14,14 @@ function question(state = initialState, action) {
       return Object.assign({}, state, {
         currentQuestion: Object.assign({}, state.currentQuestion, {
           found: question.checkFind(action.index),
+          submittedFind: action.index
+        })
+      })
+      break
+    case SubmitActions.SUBMIT_FIND_SAT:
+      return Object.assign({}, state, {
+        currentQuestion: Object.assign({}, state.currentQuestion, {
+          found: action.correct,
           submittedFind: action.index
         })
       })
@@ -37,6 +45,9 @@ function question(state = initialState, action) {
         changes.unansweredQuestions = state.unansweredQuestions.slice(1);
       }
       return Object.assign({}, state, changes)
+    case SubmitActions.LOAD_DATA:
+      const changes2 = {unansweredQuestions: action.data};
+      return Object.assign({}, state, changes2)
     default:
       return state
   }
