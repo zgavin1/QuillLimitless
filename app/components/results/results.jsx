@@ -14,9 +14,6 @@ export default React.createClass({
       } else {
         obj.metadata.correct = 0
       }
-      if (res.fixed === true) {
-        obj.metadata.correct += 1
-      }
       return obj
     })
     return results;
@@ -24,7 +21,7 @@ export default React.createClass({
 
   generatePercentage: function() {
     let count = this.props.data.results.length;
-    let correct = this.props.data.results.filter((res) => res.correct).length
+    let correct = this.props.data.results.filter((res) => {return res.found}).length
     return Math.floor((correct / count) * 100) + '%'
   },
 
@@ -42,9 +39,7 @@ export default React.createClass({
       return (
         <tr>
           <td>{row.name}</td>
-          <td>{row.total}</td>
-          <td>{row.correct}</td>
-          <td>{row.total - row.correct}</td>
+          <td>{row.correct}/{row.total}</td>
         </tr>
       );
     });
@@ -57,9 +52,7 @@ export default React.createClass({
           <thead>
             <tr>
               <th>Concept</th>
-              <th>Total Answered</th>
-              <th>Correct</th>
-              <th>Incorrect</th>
+              <th>Score</th>
             </tr>
             {this.rowBuilder()}
           </thead>

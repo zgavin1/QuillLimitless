@@ -1,10 +1,11 @@
 import React from "react";
 import "../../styles/question.scss";
+import {removeBraces} from '../../libs/sentenceSplitterV3';
 import { submitFindSAT, submitFix, nextQuestion } from '../../actions';
 
 export default React.createClass({
   checkFind: function (ind) {
-    if (this.props.question.prompt[ind].correct) {
+    if (removeBraces(this.props.question.prompt)[ind].correct) {
       this.props.dispatch(submitFindSAT(true, ind));
     } else {
       this.props.dispatch(submitFindSAT(false, ind))
@@ -12,8 +13,19 @@ export default React.createClass({
 
   },
 
+  submitNoError: function () {
+    const words = removeBraces(this.props.question.prompt);
+
+    const nCorrectAnswers =  words.filter((word) => {return word.correct === true})
+    if (nCorrectAnswers.length  === 0) {
+      this.props.dispatch(submitFindSAT(true));
+    } else {
+      this.props.dispatch(submitFindSAT(false))
+    }
+  },
+
   initialWordList: function () {
-    const words = this.props.question.prompt;
+    const words = removeBraces(this.props.question.prompt);
     // this.getTargetWord();
     return words.map((word, index) => {
       const cb = (i) => {
@@ -36,7 +48,7 @@ export default React.createClass({
   },
 
   foundIncorrectlyWordList: function () {
-    const words = this.props.question.prompt;
+    const words = removeBraces(this.props.question.prompt);
     // this.getTargetWord();
     return words.map((word, index) => {
       let styley = {};
@@ -51,7 +63,7 @@ export default React.createClass({
   },
 
   foundCorrectlyWordList: function () {
-    const words = this.props.question.prompt;
+    const words = removeBraces(this.props.question.answer);
     // this.getTargetWord();
     return words.map((word, index) => {
       let styley = {};
@@ -90,7 +102,7 @@ export default React.createClass({
   nextQuestionComponent: function () {
     if (this.props.question.found !== undefined) {
       return (
-        <div className="btn-group btn-group-lg btn-group-justified" role="group" aria-label="...">
+        <div className="btn-group btn-group-lg btn-group-justified next-question" role="group" aria-label="...">
           <a className={this.nextQuestionClass()} onClick={this.nextQuestion}>Next Question</a>
         </div>
       )
@@ -106,7 +118,7 @@ export default React.createClass({
               <div >
                 {this.generatePrompt()}
               </div>
-              <div className="btn-group btn-group-lg btn-group-justified" role="group" aria-label="...">
+              <div className="btn-group btn-group-lg btn-group-justified no-error" role="group" aria-label="...">
                 <a className="btn btn-default" onClick={this.submitNoError}>No Error</a>
               </div>
             </div>
