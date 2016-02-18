@@ -71,11 +71,26 @@ export default React.createClass({
         styley = {color: "green", fontWeight: "boldest"}
       }
       return <span style={styley}>{word.text}</span>
+    })
+  },
+
+  needsFixingWordList: function () {
+    const words = removeBraces(this.props.question.prompt);
+    // this.getTargetWord();
+    return words.map((word, index) => {
+      let styley = {};
+      if (word.correct) {
+        styley = {color: "green", fontWeight: "boldest"}
+      }
+      return <span style={styley}>{word.text}</span>
     });
   },
 
   generatePrompt: function () {
-    if (this.props.question.found === true) {
+    if (this.props.question.found && this.props.question.needsFixing) {
+      return this.needsFixingWordList();
+    }
+    else if (this.props.question.found === true) {
       return this.foundCorrectlyWordList();
     }
     else if (this.props.question.found === false) {
@@ -109,16 +124,12 @@ export default React.createClass({
       return (
         <div >
           <div >
-            <h3 className="panel-title">What should the correct word be?</h3>
-            <br/>
-          </div>
-          <div >
             <div className="input-group">
               <input type="text"
                 autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
                 className="form-control input-lg"
                 autoFocus
-                placeholder={this.getFound()}
+                placeholder={"Correct \"" + this.getFound() + "\" to fix the sentence"}
                 ref="fixInput"
                 onKeyDown={this.handleInput}
                 onChange={this.handleChange}
@@ -140,16 +151,28 @@ export default React.createClass({
 
   nextQuestionClass: function () {
     var classy;
-    if (this.props.question.found) {
+    if (this.props.question.found && this.props.question.fixed === false) {
+      classy = "btn-warning"
+    }
+    else if (this.props.question.found) {
       classy = "btn-success"
-    } else {
+    }
+    else {
       classy = "btn-danger";
     }
     return "btn " + classy;
   },
 
   nextQuestionComponent: function () {
-    if (this.props.question.found !== undefined) {
+    if (!this.props.question.needsFixing) {
+      if (this.props.question.found !== undefined) {
+        return (
+          <div className="btn-group btn-group-lg btn-group-justified next-question" role="group" aria-label="...">
+            <a className={this.nextQuestionClass()} onClick={this.nextQuestion}>Next Question</a>
+          </div>
+        )
+      }
+    } else if (this.props.question.needsFixing && this.props.question.fixed !== undefined) {
       return (
         <div className="btn-group btn-group-lg btn-group-justified next-question" role="group" aria-label="...">
           <a className={this.nextQuestionClass()} onClick={this.nextQuestion}>Next Question</a>
