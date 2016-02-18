@@ -47,4 +47,14 @@ describe("sentenceSplitter", () => {
     expect(removeBraces(provided)[1].text).toEqual("shall");
     expect(removeBraces(provided)[3].text).toEqual("not");
   })
+
+  it("should return the correct answer", () => {
+    const provided = "You {shall} [not] pass";
+    // const expectedZero = {text: "You ", underline: false};
+    // const expectedOne = {text: "{shall}", underline: true}
+    // const expectedThree = {text: "[not]", underline: true}
+    expect(getTargetPhrase(provided)).toEqual("shall");
+    // expect(removeBraces(provided)[1].text).toEqual("shall");
+    // expect(removeBraces(provided)[3].text).toEqual("not");
+  })
 })

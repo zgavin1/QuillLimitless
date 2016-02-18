@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/question.scss";
-import {removeBraces} from '../../libs/sentenceSplitterV3';
+import {removeBraces, getTargetPhrase} from '../../libs/sentenceSplitterV3';
 import { submitFindSAT, submitFix, nextQuestion } from '../../actions';
 
 export default React.createClass({
@@ -85,6 +85,55 @@ export default React.createClass({
     }
   },
 
+  getFound: function () {
+    // const words = this.splitPrompt();
+    // return words[this.getTargetWord()].replace(/[{}]/g, "")
+    return getTargetPhrase(this.props.question.prompt)
+  },
+
+  handleInput: function(event) {
+    if (event.keyCode === 13) {
+      this.checkWordSubmission();
+      this.refs.fixInput.blur()
+    }
+  },
+
+  checkWordSubmission: function () {
+    const action = submitFix(this.refs.fixInput.value);
+    this.props.dispatch(action);
+
+  },
+
+  secondaryAnswerBox: function () {
+    if (this.props.question.found === true && this.props.question.needsFixing) {
+      return (
+        <div >
+          <div >
+            <h3 className="panel-title">What should the correct word be?</h3>
+            <br/>
+          </div>
+          <div >
+            <div className="input-group">
+              <input type="text"
+                autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
+                className="form-control input-lg"
+                autoFocus
+                placeholder={this.getFound()}
+                ref="fixInput"
+                onKeyDown={this.handleInput}
+                onChange={this.handleChange}
+                />
+              <span className="input-group-btn">
+                <button className="btn btn-default btn-lg" type="button" onClick={this.checkWordSubmission}>Submit</button>
+              </span>
+            </div>
+          </div>
+          <br/>
+        </div>
+      )
+    }
+  },
+
   nextQuestion: function () {
     this.props.dispatch(nextQuestion());
   },
@@ -123,6 +172,11 @@ export default React.createClass({
               </div>
             </div>
             <p></p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12">
+            {this.secondaryAnswerBox()}
           </div>
         </div>
         <div className="row">

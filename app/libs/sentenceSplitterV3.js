@@ -54,7 +54,7 @@ export function getTargetIndex(sentence){
 }
 
 export function getTargetPhrase(sentence){
-  const words = sentenceSplitter(sentence);
-  const word = words[getTargetIndex(sentence)]
-  return braceRemover(word);
+  const words = removeBraces(sentence);
+  const frag = _.find(words, (word) => {return word.correct});
+  return frag.text
 }
