@@ -86,8 +86,38 @@ export default React.createClass({
     });
   },
 
+  fixedCorrectlyWordList: function () {
+    const words = removeBraces(this.props.question.answer);
+    // this.getTargetWord();
+    return words.map((word, index) => {
+      let styley = {};
+      if (word.correct) {
+        styley = {color: "green", fontWeight: "boldest"}
+      }
+      return <span style={styley}>{word.text}</span>
+    });
+  },
+
+  fixedIncorrectlyWordList: function () {
+    const words = removeBraces(this.props.question.answer);
+    // this.getTargetWord();
+    return words.map((word, index) => {
+      let styley = {};
+      if (word.correct) {
+        styley = {color: "red", fontWeight: "boldest"}
+      }
+      return <span style={styley}>{word.text}</span>
+    });
+  },
+
   generatePrompt: function () {
-    if (this.props.question.found && this.props.question.needsFixing) {
+    if (this.props.question.fixed) {
+      return this.fixedCorrectlyWordList();
+    }
+    if (!this.props.question.fixed) {
+      return this.fixedIncorrectlyWordList();
+    }
+    else if (this.props.question.found && this.props.question.needsFixing) {
       return this.needsFixingWordList();
     }
     else if (this.props.question.found === true) {
