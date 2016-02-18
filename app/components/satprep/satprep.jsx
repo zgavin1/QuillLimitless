@@ -114,7 +114,7 @@ export default React.createClass({
     if (this.props.question.fixed) {
       return this.fixedCorrectlyWordList();
     }
-    if (!this.props.question.fixed) {
+    else if (this.props.question.fixed === false) {
       return this.fixedIncorrectlyWordList();
     }
     else if (this.props.question.found && this.props.question.needsFixing) {
