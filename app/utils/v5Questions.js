@@ -2,9 +2,9 @@ export default [
   {
     concept: {
       uid: "1",
-      name: "Past Tesne",
-      conceptName: "Past Tesne",
-      standard: "4.1g. Past Tesne"
+      name: "Past Tense",
+      conceptName: "Past Tense",
+      standard: "4.1g. Past Tense"
     },
     answer: "We [had] initially [planned to] remove all of the old furniture from the storage area, [but] we decided against doing so because it {would have taken} too much time.",
     prompt: "We [had] initially [planned to] remove all of the old furniture from the storage area, [but] we decided against doing so because it {would have took} too much time."
