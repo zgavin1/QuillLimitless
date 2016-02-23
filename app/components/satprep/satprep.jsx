@@ -49,7 +49,7 @@ export default React.createClass({
   },
 
   foundIncorrectlyWordList: function () {
-    const words = removeBraces(this.props.question.prompt);
+    const words = removeBraces(this.props.question.answer);
     // this.getTargetWord();
     return words.map((word, index) => {
       let styley = {};
