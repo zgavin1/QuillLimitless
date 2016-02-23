@@ -83,7 +83,7 @@ export default [
    conceptName: "Possessive Nouns",
    standard: "Possessive Nouns"
  },
-  answer: "The {teacher’s} pencil [fell] [onto] the ground.",
+  answer: "The {teacher's} pencil [fell] [onto] the ground.",
   prompt: "The {teachers} pencil [fell] [onto] the ground.",
   needsFixing: true
 },
