@@ -9,10 +9,17 @@ export default React.createClass({
       obj.conceptName = res.concept.conceptName;
       obj.concept_uid = res.concept.uid;
       obj.metadata = {};
+      obj.metadata.total = 1
       if (res.found === true) {
         obj.metadata.correct = 1
       } else {
         obj.metadata.correct = 0
+      }
+      if (res.fixed === true) {
+        obj.metadata.correct += 1
+      }
+      if (res.needsFixing !== undefined) {
+        obj.metadata.total += 1
       }
       return obj
     })
@@ -20,8 +27,8 @@ export default React.createClass({
   },
 
   generatePercentage: function() {
-    let count = this.props.data.results.length;
-    let correct = this.props.data.results.filter((res) => {return res.found}).length
+    let count = (this.props.data.results.filter((res) => {return res.needsFixing}).length * 2) + (this.props.data.results.filter((res) => {return res.needsFixing === undefined}).length);
+    let correct = (this.props.data.results.filter((res) => {return res.found}).length) + (this.props.data.results.filter((res) => {return res.needsFixing && res.fixed}).length)
     return Math.floor((correct / count) * 100) + '%'
   },
 
@@ -67,13 +74,13 @@ export default React.createClass({
     var concepts = params.concept_results.map((p) => {
       if (results[p.concept_uid] !== undefined) {
         results[p.concept_uid].correct += p.metadata.correct,
-        results[p.concept_uid].total += 1
+        results[p.concept_uid].total += p.metadata.total
       } else {
         results[p.concept_uid] = {
           name: p.conceptName,
           uid: p.concept_uid,
           correct: p.metadata.correct,
-          total: 1
+          total: p.metadata.total
         }
       }
     });
