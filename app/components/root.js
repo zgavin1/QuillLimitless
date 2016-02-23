@@ -14,7 +14,8 @@ import ProgressBar from './progressBar/progressBar.jsx'
 // import "../styles/normalize.scss";
 import "../styles/bootstrap.scss";
 import "../styles/style.scss";
-import questions from "../utils/v5Questions.js";
+import satQuestions from "../utils/v5Questions.js";
+import bblQuestions from "../utils/bblQuestions.js";
 
 var Root = React.createClass({
   // select: function(state) {
@@ -24,7 +25,7 @@ var Root = React.createClass({
   //   }
   // },
 
-  startActivity: function () {
+  startActivity: function (questions) {
     const data = questions;
     const loadDataActions = loadData(data);
     this.props.dispatch(loadDataActions);
@@ -32,9 +33,17 @@ var Root = React.createClass({
     this.props.dispatch(action);
   },
 
+  bblStart: function () {
+    this.startActivity(bblQuestions);
+  },
+
+  satStart: function () {
+    this.startActivity(satQuestions);
+  },
+
   stateSpecificComponent: function () {
     if (this.props.question.currentQuestion === undefined && this.props.question.answeredQuestions.length === 0) {
-      return (<Welcome action={this.startActivity} />)
+      return (<Welcome bbl={this.bblStart} sat={this.satStart} />)
     }
     else if (this.props.question.currentQuestion === undefined && this.props.question.unansweredQuestions.length === 0) {
       return (<Exit results={this.props.question.answeredQuestions} dispatch={this.props.dispatch}/>)
