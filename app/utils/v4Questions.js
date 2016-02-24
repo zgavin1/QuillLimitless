@@ -6,8 +6,9 @@ export default [
       conceptName: "Capitalization",
       standard: "4.1g. Capitalization"
     },
-    answer: "Dear Mr. {Smith},",
-    prompt: "Dear Mr. {smith},"
+    needsFixing: true,
+    answer: "[Dear] [Mr]. {Smith},",
+    prompt: "[Dear] [Mr]. {smith},"
   },
   {
     concept: {
@@ -16,8 +17,9 @@ export default [
       conceptName: "Your vs. You're",
       standard: "4.1g. Capitalization (Difficult)"
     },
-    answer: "I am writing in response to {your} advertisment seeking a person with experience in construction.",
-    prompt: "I am writing in response to {you're} advertisment seeking a person with experience in construction."
+    needsFixing: true,
+    answer: "I am writing [in] response to {your} advertisment seeking a person [with] experience in construction.",
+    prompt: "I am writing [in] response to {you're} advertisment seeking a person [with] experience in construction."
   },
   {
     concept: {
@@ -26,8 +28,9 @@ export default [
       conceptName: "An",
       standard: "4.1g. Capitalization (Difficult)"
     },
-    answer: "I believe I am {an} ideal candiate for this position.",
-    prompt: "I believe I am {a} ideal candiate for this position."
+    needsFixing: true,
+    answer: "I believe I am {an} ideal candiate [for] this position.",
+    prompt: "I believe I am {a} ideal candiate [for] this position."
   },
   {
     concept: {
@@ -36,8 +39,9 @@ export default [
       conceptName: "Adverb",
       standard: "4.1g. Capitalization (Difficult)"
     },
-    answer: "{Currently}, I am responsible for the maintenance of a large office building.",
-    prompt: "{Current}, I am responsible for the maintenance of a large office building."
+    needsFixing: true,
+    answer: "{Currently}, I am responsible [for] the maintenance [of] a large office building.",
+    prompt: "{Current}, I am responsible [for] the maintenance [of] a large office building."
   },
 
   {
@@ -47,8 +51,9 @@ export default [
       conceptName: "Capitalization",
       standard: "4.1g. Capitalization (Difficult)"
     },
-    answer: "{I} possess strong leadership and communication skills.",
-    prompt: "{i} possess strong leadership and communication skills."
+    needsFixing: true,
+    answer: "{I} [possess] strong leadership [and] communication [skills.]",
+    prompt: "{i} [possess] strong leadership [and] communication [skills.]"
   },
   {
     concept: {
@@ -57,8 +62,8 @@ export default [
       conceptName: "Preposition (With)",
       standard: "4.1g. Capitalization (Difficult)"
     },
-    answer: "I have experience working {with} construction tools.",
-    prompt: "I have experience working {on} construction tools."
+    answer: "I have [experience] working [with] [construction] tools.",
+    prompt: "I have [experience] working [with] [construction] tools."
   },
   {
     concept: {
@@ -67,8 +72,9 @@ export default [
       conceptName: "Possessives (Commonly Confused Words)",
       standard: "4.1g. Capitalization (Difficult)"
     },
-    answer: "I am enthusiastic about your {company's} growth and success and I would appreciate the chance to contribute to it.",
-    prompt: "I am enthusiastic about your {companies} growth and success and I would appreciate the chance to contribute to it."
+    needsFixing: true,
+    answer: "I am [enthusiastic] about your {company's} growth and [success] and I would [appreciate] the chance to contribute to it.",
+    prompt: "I am [enthusiastic] about your {companies} growth and [success] and I would [appreciate] the chance to contribute to it."
   },
   {
     concept: {
@@ -77,8 +83,9 @@ export default [
       conceptName: "Punctuation",
       standard: "4.1g. Capitalization (Difficult)"
     },
-    answer: "I have attatched my resume for your {consideration.}",
-    prompt: "I have attatched my resume for your {consideration}"
+    needsFixing: true,
+    answer: "I have [attatched] [my] resume for [your] {consideration.}",
+    prompt: "I have [attatched] [my] resume for [your] {consideration}"
   },
   {
     concept: {
@@ -87,7 +94,8 @@ export default [
       conceptName: "Progressive Verb",
       standard: "4.1g. Capitalization (Difficult)"
     },
-    answer: "Thank you and I look forward to {discussing} this opportunity with you further. ",
-    prompt: "Thank you and I look forward to {discuss} this opportunity with you further. "
+    needsFixing: true,
+    answer: "Thank you and [I] look forward to {discussing} this [opportunity] [with] you further.",
+    prompt: "Thank you and [I] look forward to {discuss} this [opportunity] [with] you further. "
   },
 ]

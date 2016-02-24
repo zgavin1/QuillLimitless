@@ -14,6 +14,7 @@ import ProgressBar from './progressBar/progressBar.jsx'
 // import "../styles/normalize.scss";
 import "../styles/bootstrap.scss";
 import "../styles/style.scss";
+import doeQuestions from "../utils/v4Questions.js";
 import satQuestions from "../utils/v5Questions.js";
 import bblQuestions from "../utils/bblQuestions.js";
 
@@ -41,9 +42,13 @@ var Root = React.createClass({
     this.startActivity(satQuestions);
   },
 
+  doeStart: function () {
+    this.startActivity(doeQuestions);
+  },
+
   stateSpecificComponent: function () {
     if (this.props.question.currentQuestion === undefined && this.props.question.answeredQuestions.length === 0) {
-      return (<Welcome bbl={this.bblStart} sat={this.satStart} />)
+      return (<Welcome bbl={this.bblStart} sat={this.satStart} doe={this.doeStart}/>)
     }
     else if (this.props.question.currentQuestion === undefined && this.props.question.unansweredQuestions.length === 0) {
       return (<Exit results={this.props.question.answeredQuestions} dispatch={this.props.dispatch}/>)
