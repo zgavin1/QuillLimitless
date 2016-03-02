@@ -48,8 +48,8 @@ var Root = React.createClass({
   },
 
   stateSpecificComponent: function () {
-    if (this.props.user === undefined) {
-      return (<Register />)
+    if (this.props.user.name === undefined) {
+      return (<Register dispatch={this.props.dispatch}/>)
     }
     else if (this.props.question.currentQuestion === undefined && this.props.question.answeredQuestions.length === 0) {
       return (<Welcome bbl={this.bblStart} sat={this.satStart} doe={this.doeStart}/>)
@@ -89,7 +89,7 @@ var Root = React.createClass({
 
   render(){
     console.log(this)
-    const { dispatch, score, question} = this.props;
+    const { dispatch, score, question, user} = this.props;
 
 
 
@@ -105,8 +105,9 @@ var Root = React.createClass({
 
 function select(state) {
   return {
+    question: state.question,
     score: state.score,
-    question: state.question
+    user: state.user
   }
 }
 

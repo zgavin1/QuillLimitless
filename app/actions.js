@@ -7,13 +7,15 @@
  export const SUBMIT_FIX = 'SUBMIT_FIX'
  export const NEXT_QUESTION = 'NEXT_QUESTION'
  export const LOAD_DATA = 'LOAD_DATA'
+ export const REGISTERED = 'REGISTERED'
 
 export const SubmitActions = {
   SUBMIT_FIND,
   SUBMIT_FIND_SAT,
   SUBMIT_FIX,
   NEXT_QUESTION,
-  LOAD_DATA
+  LOAD_DATA,
+  REGISTERED
 }
 
 /*
@@ -37,5 +39,9 @@ export function nextQuestion() {
 }
 
 export function loadData(data) {
-  return { type: LOAD_DATA, data: data}
+  return { type: LOAD_DATA, data}
+}
+
+export function registered(data) {
+  return { type: REGISTERED, data}
 }
