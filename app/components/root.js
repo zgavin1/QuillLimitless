@@ -8,6 +8,7 @@ import Edit from "./edit/edit.jsx";
 import TapNFix from './tapNFix/tapNFix.jsx'
 import SATPrep from './satprep/satprep.jsx'
 import Welcome from "./welcome/welcome.jsx";
+import Register from "./register/register.jsx";
 import Exit from "./exit/exit.jsx";
 import DevTools from '../utils/devTools';
 import ProgressBar from './progressBar/progressBar.jsx'
@@ -47,7 +48,10 @@ var Root = React.createClass({
   },
 
   stateSpecificComponent: function () {
-    if (this.props.question.currentQuestion === undefined && this.props.question.answeredQuestions.length === 0) {
+    if (this.props.user === undefined) {
+      return (<Register />)
+    }
+    else if (this.props.question.currentQuestion === undefined && this.props.question.answeredQuestions.length === 0) {
       return (<Welcome bbl={this.bblStart} sat={this.satStart} doe={this.doeStart}/>)
     }
     else if (this.props.question.currentQuestion === undefined && this.props.question.unansweredQuestions.length === 0) {
@@ -93,6 +97,7 @@ var Root = React.createClass({
       <div>
         <ProgressBar questions={question} />
         {this.stateSpecificComponent()}
+        <DevTools/>
       </div>
     )
   }

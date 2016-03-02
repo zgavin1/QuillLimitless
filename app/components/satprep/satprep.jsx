@@ -44,7 +44,7 @@ export default React.createClass({
         styling = "underlineSpan"
       }
 
-      return <span key={index} className={styling} onClick={cb(index)}>{word.text}</span>
+      return <span key={index} className={styling + " text"} onClick={cb(index)}>{word.text}</span>
     });
   },
 
@@ -59,7 +59,7 @@ export default React.createClass({
         styley = {color: "red", fontWeight: "boldest"}
       }
 
-      return <span key={index} style={styley}>{word.text}</span>
+      return <span key={index} className="text" style={styley}>{word.text}</span>
     });
   },
 
@@ -71,7 +71,7 @@ export default React.createClass({
       if (word.correct) {
         styley = {color: "green", fontWeight: "boldest"}
       }
-      return <span key={index} style={styley}>{word.text}</span>
+      return <span key={index} className="text" style={styley}>{word.text}</span>
     })
   },
 
@@ -83,7 +83,7 @@ export default React.createClass({
       if (word.correct) {
         styley = {color: "green", fontWeight: "boldest"}
       }
-      return <span key={index} style={styley}>{word.text}</span>
+      return <span key={index} className="text" style={styley}>{word.text}</span>
     });
   },
 
@@ -95,7 +95,7 @@ export default React.createClass({
       if (word.correct) {
         styley = {color: "green", fontWeight: "boldest"}
       }
-      return <span key={index} style={styley}>{word.text}</span>
+      return <span key={index} className="text" style={styley}>{word.text}</span>
     });
   },
 
@@ -107,7 +107,7 @@ export default React.createClass({
       if (word.correct) {
         styley = {color: "red", fontWeight: "boldest"}
       }
-      return <span key={index} style={styley}>{word.text}</span>
+      return <span key={index} className="text" style={styley}>{word.text}</span>
     });
   },
 
