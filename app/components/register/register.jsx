@@ -1,5 +1,6 @@
 import React from 'react';
 import RadioGroup from 'react-radio-group';
+import Firebase from 'firebase';
 
 export default React.createClass({
   getInitialState: function () {
@@ -25,7 +26,13 @@ export default React.createClass({
     e.preventDefault();
     var data = this.state;
     data.name = this.refs.name.value
-    console.log(data);
+    const ref = new Firebase("https://limitless.firebaseio.com/users")
+    var userDetails = ref.push(data, () => {
+      userDetails.on('value', function(dataSnapshot){
+        console.log(dataSnapshot.val())
+        console.log(dataSnapshot.ref().toString())
+      });
+    })
   },
 
   render: function () {
