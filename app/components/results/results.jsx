@@ -4,7 +4,17 @@ import Firebase from "firebase"
 import {exitToHome} from "../../actions"
 
 export default React.createClass({
+  getInitialState: function () {
+    return {
+      uniqCode: null
+    }
+  },
+
   componentDidMount: function () {
+    const ref = new Firebase(this.props.data.user.ref + "/uniqCode")
+    const uniqCode = Math.floor(Math.random() * 1000000)
+    ref.set(uniqCode)
+    this.setState({uniqCode})
     this.saveResults();
   },
 
@@ -114,6 +124,7 @@ export default React.createClass({
   render: function() {
     return (
       <div>
+      <h4>Unique code: <strong>{this.state.uniqCode}</strong></h4>
       <h3>{this.generatePercentage()} Correct</h3>
       {this.conceptsToRows()}
       {this.returnButton()}

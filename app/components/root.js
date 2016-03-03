@@ -97,7 +97,6 @@ var Root = React.createClass({
       <div>
         <ProgressBar questions={question} />
         {this.stateSpecificComponent()}
-        <DevTools/>
       </div>
     )
   }
