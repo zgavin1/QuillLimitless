@@ -50,6 +50,12 @@ function question(state = initialState, action) {
         unansweredQuestions: require('../utils/' + action.data).default,
         questionSet: action.data};
       return Object.assign({}, state, changes2)
+    case SubmitActions.EXIT:
+     return Object.assign({}, state, {
+        completedQuestions: undefined,
+        answeredQuestions: [],
+        unansweredQuestions: []
+      })
     default:
       return state
   }

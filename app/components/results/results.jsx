@@ -1,8 +1,12 @@
 import React from 'react'
 import _ from "underscore"
 import Firebase from "firebase"
+import {exitToHome} from "../../actions"
 
 export default React.createClass({
+  componentDidMount: function () {
+    this.saveResults();
+  },
 
   generateConceptResults: function() {
     const results = this.props.data.results.map((res) => {
@@ -94,7 +98,7 @@ export default React.createClass({
 
   returnButton: function() {
     return (
-      <button type='button' className='btn btn-action' onClick={this.saveResults}>Return to Homepage</button>
+      <button type='button' className='btn btn-action' onClick={this.exit}>Return to Homepage</button>
     );
   },
 

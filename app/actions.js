@@ -8,6 +8,7 @@
  export const NEXT_QUESTION = 'NEXT_QUESTION'
  export const LOAD_DATA = 'LOAD_DATA'
  export const REGISTERED = 'REGISTERED'
+ export const EXIT = 'EXIT'
 
 export const SubmitActions = {
   SUBMIT_FIND,
@@ -15,7 +16,8 @@ export const SubmitActions = {
   SUBMIT_FIX,
   NEXT_QUESTION,
   LOAD_DATA,
-  REGISTERED
+  REGISTERED,
+  EXIT
 }
 
 /*
@@ -44,4 +46,8 @@ export function loadData(data) {
 
 export function registered(data) {
   return { type: REGISTERED, data}
+}
+
+export function exitToHome() {
+  return { type: EXIT}
 }
