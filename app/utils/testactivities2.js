@@ -66,3 +66,4 @@ export default [
     prompt: "Next year, {factorys}, cars, and people will add 40 billion tons of [carbon dioxide] into the [earth’s] atmosphere.",
     answer: "Next year, {factories}, cars, and people will add 40 billion tons of [carbon dioxide] into the [earth’s] atmosphere.",
   },
+]

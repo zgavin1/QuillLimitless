@@ -46,7 +46,9 @@ function question(state = initialState, action) {
       }
       return Object.assign({}, state, changes)
     case SubmitActions.LOAD_DATA:
-      const changes2 = {unansweredQuestions: action.data};
+      const changes2 = {
+        unansweredQuestions: require('../utils/' + action.data).default,
+        questionSet: action.data};
       return Object.assign({}, state, changes2)
     default:
       return state

@@ -17,11 +17,15 @@ export default React.createClass({
                 </p>
               </div>
               <div className="panel-body">
-                <a onClick={this.props.bbl}>Bronx Better Learning</a>
+                <a onClick={this.props.start.bind(null, 'testactivities1')}>Test 1</a>
                 <hr/>
-                <a onClick={this.props.sat}>SAT PREP</a>
+                  <a onClick={this.props.start.bind(null, 'testactivities2')}>Test 2</a>
+                  <hr/>
+                <a onClick={this.props.start.bind(null, 'bblQuestions')}>Bronx Better Learning</a>
                 <hr/>
-                <a onClick={this.props.doe}>DOE Fund</a>
+                <a onClick={this.props.start.bind(null, 'v5Questions')}>SAT PREP</a>
+                <hr/>
+                <a onClick={this.props.start.bind(null, 'v4Questions')}>DOE Fund</a>
               </div>
             </div>
           </div>

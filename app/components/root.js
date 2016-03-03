@@ -52,10 +52,10 @@ var Root = React.createClass({
       return (<Register dispatch={this.props.dispatch}/>)
     }
     else if (this.props.question.currentQuestion === undefined && this.props.question.answeredQuestions.length === 0) {
-      return (<Welcome bbl={this.bblStart} sat={this.satStart} doe={this.doeStart}/>)
+      return (<Welcome start={this.startActivity} bbl={this.bblStart} sat={this.satStart} doe={this.doeStart}/>)
     }
     else if (this.props.question.currentQuestion === undefined && this.props.question.unansweredQuestions.length === 0) {
-      return (<Exit results={this.props.question.answeredQuestions} dispatch={this.props.dispatch}/>)
+      return (<Exit user={this.props.user} results={this.props.question.answeredQuestions} questionSet={this.props.question.questionSet} dispatch={this.props.dispatch}/>)
     }
     else {
       // return (

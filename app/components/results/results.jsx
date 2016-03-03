@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from "underscore"
+import Firebase from "firebase"
 
 export default React.createClass({
 
@@ -93,12 +94,17 @@ export default React.createClass({
 
   returnButton: function() {
     return (
-      <button type='button' className='btn btn-action' onClick={window.location.reload.bind(window.location)}>Return to Homepage</button>
+      <button type='button' className='btn btn-action' onClick={this.saveResults}>Return to Homepage</button>
     );
   },
 
   exit: function() {
     this.props.dispatch(exitToHome());
+  },
+
+  saveResults: function() {
+    const ref = new Firebase(this.props.data.user.ref + "/results/" + this.props.data.questionSet);
+    ref.set(this.props.data.results)
   },
 
   render: function() {

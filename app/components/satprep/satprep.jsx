@@ -19,9 +19,9 @@ export default React.createClass({
 
     const nCorrectAnswers =  words.filter((word) => {return word.correct === true})
     if (nCorrectAnswers.length  === 0) {
-      this.props.dispatch(submitFindSAT(true));
+      this.props.dispatch(submitFindSAT(true, "NE"));
     } else {
-      this.props.dispatch(submitFindSAT(false))
+      this.props.dispatch(submitFindSAT(false, "NE"))
     }
   },
 
